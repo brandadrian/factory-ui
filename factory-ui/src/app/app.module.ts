@@ -14,12 +14,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
+import { TableComponent } from './table/components/table.component';
+import { GenericDialogComponent } from './generic-dialog/components/generic-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GenericDialogComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -27,17 +29,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    //MatButtonModule,
-    //MatToolbarModule,
-    //MatProgressBarModule,
-    // MatProgressSpinnerModule,
-    // MatDialogModule,
-    // MatFormFieldModule,
-    //MatInputModule,
-    // MatRippleModule,
-    //MatTableModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatTableModule
   ],
   providers: [],
+  exports: [   
+    GenericDialogComponent,
+    TableComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

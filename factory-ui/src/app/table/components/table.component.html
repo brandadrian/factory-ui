@@ -1,0 +1,15 @@
+<mat-form-field *ngIf="isFilterVisible">
+    <input matInput (keyup)="onFilter($event)" placeholder="Filter">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+    <ng-container [matColumnDef]="columnDefinition.id" *ngFor="let columnDefinition of columnDefinitions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnDefinition.description}} </th>
+      <td mat-cell *matCellDef="let element; let i=index;"> {{element[columnDefinition.id]}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columnDefinitionIds"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnDefinitionIds;"></tr>
+  </table>
+  
+  
