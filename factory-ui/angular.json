@@ -105,6 +105,37 @@
           }
         }
       }
+    },
+    "factory-ui-lib": {
+      "projectType": "library",
+      "root": "projects/factory-ui-lib",
+      "sourceRoot": "projects/factory-ui-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/factory-ui-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/factory-ui-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/factory-ui-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/factory-ui-lib/src/test.ts",
+            "tsConfig": "projects/factory-ui-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/factory-ui-lib/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "factory-ui"

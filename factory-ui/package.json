@@ -8,9 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "linked-libs": "npm ls --global --link --depth=0",
-    "publish: factory-ui": "ng build --prod --project=factory-ui && npm publish ./dist/factory-ui",
-    "link: factory-ui": "ng build --prod --project=factory-ui && npm link ./dist/factory-ui",
-    "unlink: factory-ui": "npm rm factory-ui --global"
+    "publish: factory-ui": "ng build --prod --project=factory-ui-lib && npm publish ./dist/factory-ui-lib",
+    "link: factory-ui": "ng build --prod --project=factory-ui-lib && npm link ./dist/factory-ui-lib",
+    "unlink: factory-ui": "npm rm factory-ui-lib --global"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +39,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-packagr": "^12.1.0",
     "typescript": "~4.3.2"
   }
 }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { GenericDialogField } from './generic-dialog/data/generic-dialog-field';
-import { GenericDialogService } from './generic-dialog/services/generic-dialog.service';
-import { TableColumnDefinition, TableColumnType } from './table/data/table-item';
+import { GenericDialogField, GenericDialogService, TableColumnDefinition, TableColumnType } from 'projects/factory-ui-lib/src/public-api';
 
 @Component({
   selector: 'app-root',
