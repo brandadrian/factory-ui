@@ -1,5 +1,5 @@
 {
-  "name": "factory-ui-lib",
+  "name": "factory-ui",
   "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^12.1.0",
