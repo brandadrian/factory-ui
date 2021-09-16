@@ -1,5 +1,5 @@
 <mat-form-field *ngIf="isFilterVisible">
-    <input matInput (keyup)="onFilter($event)" placeholder="Filter...">
+    <input matInput (keyup)="onFilter($event)" placeholder="Filter">
 </mat-form-field>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <ng-container [matColumnDef]="columnDefinition.id" *ngFor="let columnDefinition of columnDefinitions">
