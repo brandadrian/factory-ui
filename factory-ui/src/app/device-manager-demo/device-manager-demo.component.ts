@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, of, pipe, Subject } from 'rxjs';
   styleUrls: ['./device-manager-demo.component.scss']
 })
 export class DeviceManagerDemoComponent implements OnInit {
-  private commandsMockFromBackend = [
+  private lightCommandsMockFromBackend = [
     {
       DeviceId: 1,
       Command: "LightOn"
@@ -19,11 +19,37 @@ export class DeviceManagerDemoComponent implements OnInit {
       Command: "LightOff"
     }];
 
-  private deviceInformationMockFromBackend = {
+  private lightDeviceInformationMockFromBackend = {
     DeviceId: 1,
     Description: "Light swtich",
-    Commands: this.commandsMockFromBackend,
-    Command: this.commandsMockFromBackend[0],
+    Commands: this.lightCommandsMockFromBackend,
+    Command: this.lightCommandsMockFromBackend[0],
+    State: "online"
+  };
+
+  private musicCommandsMockFromBackend = [
+    {
+      DeviceId: 2,
+      Command: "MusicOn"
+    },
+    {
+      DeviceId: 2,
+      Command: "MusicOff"
+    },
+    {
+      DeviceId: 2,
+      Command: "VolumeUp"
+    },
+    {
+      DeviceId: 2,
+      Command: "VolumeDown"
+    }];
+
+  private musicDeviceInformationMockFromBackend = {
+    DeviceId: 1,
+    Description: "Music swtich",
+    Commands: this.musicCommandsMockFromBackend,
+    Command: this.musicCommandsMockFromBackend[0],
     State: "online"
   };
 
@@ -36,18 +62,24 @@ export class DeviceManagerDemoComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    this.commandChange.pipe(tap((deviceCommand: DeviceCommand) => {
-      setTimeout(() => this.isCommandExecuting.next(false), 2000 ); 
-    })).subscribe();
   }
 
-  private executeCommandInternal(command: DeviceCommand): Observable<any> {
-    this.deviceInformationMockFromBackend.Command = command;
+  private executeMusicCommandInternal(command: DeviceCommand): Observable<any> {
+    this.musicDeviceInformationMockFromBackend.Command = command;
     return of({});
   }
 
-  private getDeviceInformationInternal(): Observable<DeviceInformation> {
-    return  of(this.deviceInformationMockFromBackend).pipe(delay(2000));
+  private getMusicDeviceInformationInternal(): Observable<DeviceInformation> {
+    return  of(this.musicDeviceInformationMockFromBackend).pipe(delay(2000));
+  }
+
+  private executeLightCommandInternal(command: DeviceCommand): Observable<any> {
+    this.lightDeviceInformationMockFromBackend.Command = command;
+    return of({});
+  }
+
+  private getLightDeviceInformationInternal(): Observable<DeviceInformation> {
+    return  of(this.lightDeviceInformationMockFromBackend).pipe(delay(2000));
   }
   
   public deviceManagerItems$: Observable<Array<DeviceManagerItem>> = of([
@@ -56,16 +88,32 @@ export class DeviceManagerDemoComponent implements OnInit {
       IsReadOnly: false,
       Device:     {
         Id: 1,
-        Type: "DeviceDemo",
+        Type: "lightSwitch",
         IpAddress: "192.168.1.180",
-        Name: "Demo Device Name",
-        Description: "This is a demo device",
+        Name: "Light Switch",
+        Description: "Turn light on and off",
         Test: "test"
       }
       ,
-      DeviceInformation: this.getDeviceInformationInternal().pipe(map(deviceInformation => deviceInformation)),
-      getDeviceInformation: () => this.getDeviceInformationInternal(),
-      executeCommand: (command: DeviceCommand) => this.executeCommandInternal(command)   
-  }
+      DeviceInformation: this.getLightDeviceInformationInternal().pipe(map(deviceInformation => deviceInformation)),
+      getDeviceInformation: () => this.getLightDeviceInformationInternal(),
+      executeCommand: (command: DeviceCommand) => this.executeLightCommandInternal(command)   
+  },
+  {
+    IsLoading: false,
+    IsReadOnly: false,
+    Device:     {
+      Id: 1,
+      Type: "musicSwitch",
+      IpAddress: "192.168.1.181",
+      Name: "Music Switch",
+      Description: "Turn music on and off and control volume",
+      Test: "test"
+    }
+    ,
+    DeviceInformation: this.getMusicDeviceInformationInternal().pipe(map(deviceInformation => deviceInformation)),
+    getDeviceInformation: () => this.getMusicDeviceInformationInternal(),
+    executeCommand: (command: DeviceCommand) => this.executeMusicCommandInternal(command)   
+}
   ]);
 }

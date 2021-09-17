@@ -24,7 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
     FactoryUiLibComponent,
     GenericDialogComponent,
     TableComponent,
-    DeviceManagerComponent
+    DeviceManagerComponent,
   ],
   imports: [
     CommonModule,
