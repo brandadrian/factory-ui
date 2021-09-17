@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { of, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { Device, DeviceCommand, DeviceManagerItem } from '../../interfaces/device';
+import { Device, DeviceCommand, DeviceInformation, DeviceManagerItem } from '../../interfaces/device';
 
 @Component({
   selector: 'factory-ui-device-manager',
@@ -24,14 +24,21 @@ export class DeviceManagerComponent {
     deviceManagerItem.IsReadOnly = true;
     deviceManagerItem.IsLoading = true;
     this.changeDetectorRef.detectChanges();
-    deviceManagerItem.executeCommand(deviceCommand).subscribe(() => {
-      deviceManagerItem.getDeviceInformation().subscribe(result => {
-        deviceManagerItem.DeviceInformation = of(result);
-        deviceManagerItem.IsReadOnly = false;
-        deviceManagerItem.IsLoading = false;
-        this.changeDetectorRef.detectChanges();
-      });
-    });
+    deviceManagerItem.executeCommand(deviceCommand).pipe(
+      switchMap(
+        () => deviceManagerItem.getDeviceInformation()
+      ),
+      tap(
+          (
+            deviceInformation: DeviceInformation) => 
+              {
+              deviceManagerItem.DeviceInformation = of(deviceInformation);
+              deviceManagerItem.IsReadOnly = false;
+              deviceManagerItem.IsLoading = false;
+              this.changeDetectorRef.detectChanges();
+              }
+        )
+      ).subscribe();
   }
 
   public trackById(index: number, device: Device) : number {
