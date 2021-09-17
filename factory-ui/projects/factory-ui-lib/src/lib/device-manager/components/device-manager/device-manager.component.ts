@@ -25,7 +25,9 @@ export class DeviceManagerComponent {
     this.changeDetectorRef.detectChanges();
     deviceManagerItem.executeCommand(deviceCommand).pipe(
       switchMap(
-        () => deviceManagerItem.getDeviceInformation()
+        () => {
+          return deviceManagerItem.getDeviceInformation();
+        }
       ),
       tap(
           (
