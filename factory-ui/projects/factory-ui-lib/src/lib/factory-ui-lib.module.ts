@@ -13,35 +13,43 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GenericDialogComponent } from './generic-dialog/components/generic-dialog.component';
 import { MatTableModule } from '@angular/material/table';
 import { TableComponent } from './table/components/table.component';
-
-
-
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { DeviceManagerComponent } from './device-manager/components/device-manager/device-manager.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
     FactoryUiLibComponent,
     GenericDialogComponent,
-    TableComponent
+    TableComponent,
+    DeviceManagerComponent
   ],
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
+    MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatProgressBarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatSelectModule
   ],
   exports: [
     FactoryUiLibComponent,
     GenericDialogComponent,
-    TableComponent
+    TableComponent,
+    DeviceManagerComponent
   ]
 })
 export class FactoryUiLibModule { }

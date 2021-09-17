@@ -1,0 +1,69 @@
+<div class="main-container">
+    <div *ngIf="overviewImageLink">
+        <mat-card class="device-card">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon color="primary">info</mat-icon>
+                </div>
+                <mat-card-title>Anlage</mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <img class="overview-image" [src]="overviewImageLink">
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngFor="let deviceManagerItem of deviceManagerItems$ | async" class="devices">
+        <mat-card class="device-card">
+
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon color="primary" *ngIf="deviceManagerItem.Device?.Type === 'Shelly'">developer_board
+                    </mat-icon>
+                    <mat-icon color="primary" *ngIf="deviceManagerItem.Device?.Type === 'Sensor'">sensors</mat-icon>
+                </div>
+                <mat-card-title>{{deviceManagerItem.Device?.Name}}</mat-card-title>
+                <mat-card-subtitle>{{deviceManagerItem.Device?.Description}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Typ: <b>{{deviceManagerItem.Device?.Type}}</b></p>
+                <p>IP Adresse: <b>{{deviceManagerItem.Device?.IpAddress}}</b></p>
+                <p>Status: <b>{{(deviceManagerItem.DeviceInformation | async)?.State}}</b></p>
+            </mat-card-content>
+            <div *ngIf="(deviceManagerItem.DeviceInformation | async) as deviceInformation; else loadingActions">
+                <mat-card-actions>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Kommando</mat-label>
+                        <mat-select [(value)]="deviceInformation.Command" [disabled]="deviceManagerItem?.IsLoading">
+                            <mat-option *ngFor="let command of deviceInformation.Commands" [value]="command">
+                                {{command.Command}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary"
+                        (click)="onCommandClick(deviceManagerItem, deviceInformation.Command)"
+                        [disabled]="deviceManagerItem?.IsLoading">Ausführen</button>
+                </mat-card-actions>
+            </div>
+            <div *ngIf="deviceManagerItem.IsLoading">
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #loadingActions>
+    <mat-card-actions>
+        <mat-form-field appearance="fill">
+            <mat-label>Kommando</mat-label>
+            <mat-select [disabled]="true">
+                <mat-option>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="true">Ausführen</button>
+    </mat-card-actions>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

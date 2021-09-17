@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
       factory-ui-lib works!
     </p>
   `,
-  styles: [
-  ]
+  styles: []
 })
 export class FactoryUiLibComponent implements OnInit {
 

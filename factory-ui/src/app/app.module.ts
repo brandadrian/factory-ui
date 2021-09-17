@@ -15,17 +15,24 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FactoryUiLibModule } from 'projects/factory-ui-lib/src/public-api';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { DeviceManagerDemoComponent } from './device-manager-demo/device-manager-demo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DeviceManagerDemoComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
     MatButtonModule,
     MatToolbarModule,
     MatProgressBarModule,
@@ -35,7 +42,8 @@ import { FactoryUiLibModule } from 'projects/factory-ui-lib/src/public-api';
     MatInputModule,
     MatRippleModule,
     MatTableModule,
-    FactoryUiLibModule
+    FactoryUiLibModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

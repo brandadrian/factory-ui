@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { GenericDialogField, GenericDialogService, TableColumnDefinition, TableColumnType } from 'projects/factory-ui-lib/src/public-api';
+import { Component, OnInit } from '@angular/core';
+import { DeviceCommand, DeviceInformation, DeviceManagerItem, GenericDialogField, GenericDialogService, TableColumnDefinition, TableColumnType } from 'projects/factory-ui-lib/src/public-api';
+import { map, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { DeviceInformationPipe } from 'projects/factory-ui-lib/src/lib/device-manager/pipes/device-informatin.pipe';
 
 @Component({
   selector: 'app-root',
