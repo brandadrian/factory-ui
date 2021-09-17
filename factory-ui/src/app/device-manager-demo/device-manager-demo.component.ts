@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, of, pipe, Subject } from 'rxjs';
   templateUrl: './device-manager-demo.component.html',
   styleUrls: ['./device-manager-demo.component.scss']
 })
-export class DeviceManagerDemoComponent implements OnInit {
+export class DeviceManagerDemoComponent {
   private lightCommandsMockFromBackend = [
     {
       DeviceId: 1,
@@ -53,16 +53,10 @@ export class DeviceManagerDemoComponent implements OnInit {
     State: "online"
   };
 
-
-  public commandChange: Subject<DeviceCommand> = new Subject();
   private isCommandExecuting: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isCommandExecuting$: Observable<boolean> = this.isCommandExecuting.asObservable();
 
-
   constructor() { }
-
-  public ngOnInit(): void {
-  }
 
   private executeMusicCommandInternal(command: DeviceCommand): Observable<any> {
     this.musicDeviceInformationMockFromBackend.Command = command;

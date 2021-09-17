@@ -11,14 +11,13 @@ import { Device, DeviceCommand, DeviceInformation, DeviceManagerItem } from '../
 })
 export class DeviceManagerComponent {
 
-  @Input() public commandChange: Subject<DeviceCommand> = new Subject();
   @Input() public deviceManagerItems$: Observable<Array<DeviceManagerItem>> = of([]);
   @Input() public overviewImageLink: string | null = null;
   @Input() public isReadOnly: boolean = false;
 
   constructor(public changeDetectorRef: ChangeDetectorRef) { 
     
-   }
+  }
 
   public onCommandClick(deviceManagerItem: DeviceManagerItem, deviceCommand: DeviceCommand): void {
     deviceManagerItem.IsReadOnly = true;
@@ -32,10 +31,10 @@ export class DeviceManagerComponent {
           (
             deviceInformation: DeviceInformation) => 
               {
-              deviceManagerItem.DeviceInformation = of(deviceInformation);
-              deviceManagerItem.IsReadOnly = false;
-              deviceManagerItem.IsLoading = false;
-              this.changeDetectorRef.detectChanges();
+                deviceManagerItem.DeviceInformation = of(deviceInformation);
+                deviceManagerItem.IsReadOnly = false;
+                deviceManagerItem.IsLoading = false;
+                this.changeDetectorRef.detectChanges();
               }
         )
       ).subscribe();
