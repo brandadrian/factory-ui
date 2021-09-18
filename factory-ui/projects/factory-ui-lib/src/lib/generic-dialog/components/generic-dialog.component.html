@@ -3,6 +3,7 @@
   <p>{{genericDialogService.text}}</p>
   <div *ngFor="let field of genericDialogService.fields">
     <mat-form-field>
+      <mat-label>{{field.labelName}}</mat-label>
       <input matInput [(ngModel)]="field.value">
     </mat-form-field>
   </div>

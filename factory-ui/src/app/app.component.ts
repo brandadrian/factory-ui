@@ -22,8 +22,8 @@ export class AppComponent {
   ];
 
   public dialogValues: Array<GenericDialogField> = [
-    {name: 'field1', value: "Field 1"},
-    {name: 'field2', value: "Field 2"},
+    {id: 'name', labelName: 'Name', value: "Hans"},
+    {id: 'age', labelName: 'Alter', value: ""},
   ];
   public columnDefinitionIds: any =this.columnDefinitions.map(item => item.id);
 

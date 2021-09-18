@@ -1,4 +1,5 @@
 export interface GenericDialogField{
-    name: string;
+    id: string;
+    labelName: string;
     value: any;
 }
