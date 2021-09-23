@@ -45,7 +45,6 @@ export class AppComponent {
   }
 
   public onOpenGenericDialogSimple(): void {
-
     this.genericDialogService.openDialog(     
       "Sample Title",
       "Description of what will happen in this dialog.",
@@ -56,5 +55,10 @@ export class AppComponent {
   public onAddGridData(): void {
     this.tableData.push({name: 'Thomas Meier', age: '42', address: 'Bahnhofstrasse 10, 9000 St.Gallen'});
     this.tableData = [...this.tableData];
+  }
+
+  public onAddGridColumn(): void {
+    this.columnDefinitions.push({id: 'test', description: 'Name', type: TableColumnType.Text});
+    this.columnDefinitions = [...this.columnDefinitions];
   }
 }

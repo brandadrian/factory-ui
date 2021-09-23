@@ -28,7 +28,7 @@ export class TableComponent implements OnInit, OnChanges {
       this.changeDetectorRefs.detectChanges();
     }
 
-    if (changes.columnDefinitionIds) {
+    if (changes.columnDefinitions) {
       this.columnDefinitionIds =this.columnDefinitions.map(item => item.id);
       this.changeDetectorRefs.detectChanges();
     }
