@@ -20,6 +20,14 @@
       <div class="demo-item">
         <h2>Table</h2>
         <factory-ui-table [isFilterVisible]="true" [columnDefinitions]="columnDefinitions" [data]="tableData"></factory-ui-table>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onAddGridData()"
+          class="table-button"
+        >
+        Add data
+        </button>
       </div>
 
       <div class="demo-item">

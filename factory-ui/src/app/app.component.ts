@@ -43,4 +43,9 @@ export class AppComponent {
         console.warn("Dialog has been closed.", this.dialogValues)
       });
   }
+
+  public onAddGridData(): void {
+    this.tableData.push({name: 'Thomas Meier', age: '42', address: 'Bahnhofstrasse 10, 9000 St.Gallen'});
+    this.tableData = [...this.tableData];
+  }
 }

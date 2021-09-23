@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableColumnDefinition, TableRow } from '../data/table-item';
@@ -8,7 +9,7 @@ import { TableColumnDefinition, TableRow } from '../data/table-item';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort: MatSort | undefined;
   
   @Input() public isFilterVisible: boolean = false;
@@ -17,7 +18,21 @@ export class TableComponent implements OnInit {
   public columnDefinitionIds: Array<string> = [];
   public dataSource: any;
 
-  constructor() { }
+  constructor(
+    private changeDetectorRefs: ChangeDetectorRef
+  ) { }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.data) {
+      this.dataSource = new MatTableDataSource(this.data);
+      this.changeDetectorRefs.detectChanges();
+    }
+
+    if (changes.columnDefinitionIds) {
+      this.columnDefinitionIds =this.columnDefinitions.map(item => item.id);
+      this.changeDetectorRefs.detectChanges();
+    }
+  }
 
   public ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.data);
